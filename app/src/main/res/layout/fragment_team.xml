@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.fragments.TeamFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/regionNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/barlow_bold"
+            android:gravity="center"
+            android:text="@string/name_region"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_bold"
+            android:gravity="center"
+            android:text="@string/region"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/emptyPokemonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="135dp"
+            android:fontFamily="@font/barlow_light"
+            android:text="@string/dont_have_team"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:src="@drawable/team" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/regionsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="5" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/createTeam"
+                android:layout_width="170dp"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_button_add"
+                android:drawableLeft="@drawable/pokeball"
+                android:fontFamily="@font/barlow_regular"
+                android:text="@string/create_team"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/background_color_button"
+                tools:ignore="RtlHardcoded,UnusedAttribute" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

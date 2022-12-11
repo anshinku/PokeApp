@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/authContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="?android:textColorPrimary"
+    android:orientation="vertical"
+    tools:context=".ui.activities.AuthActivity">
+
+    <LinearLayout
+        android:id="@+id/logo_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center|top"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:contentDescription="@null"
+            android:src="@drawable/pokemon_title" />
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ash_logo" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/inputs_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo_container"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/custom_button"
+            android:drawableStart="@drawable/ic_alternate_email_24"
+            android:drawablePadding="10dp"
+            android:hint="@string/email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textColor="?android:textColorPrimaryInverse"
+            android:textColorHint="?android:textColorPrimaryInverse"
+            android:textSize="12sp"
+            app:backgroundTint="?android:textColorPrimary"
+            tools:ignore="LabelFor" />
+
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/custom_button"
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:drawablePadding="10dp"
+            android:hint="@string/password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColor="?android:textColorPrimaryInverse"
+            android:textColorHint="?android:textColorPrimaryInverse"
+            android:textSize="12sp"
+            app:backgroundTint="?android:textColorPrimary"
+            tools:ignore="LabelFor" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/recover_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inputs_container"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:fontFamily="@font/barlow_regular"
+        android:gravity="end"
+        android:text="@string/recovery_password"
+        android:textColor="?android:textColorPrimary" />
+
+    <Button
+        android:id="@+id/singInButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/recover_password"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/barlow_bold"
+        android:text="@string/sing_in"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/blue_200" />
+
+    <Button
+        android:id="@+id/singUpButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/recover_password"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/barlow_bold"
+        android:text="@string/sing_up"
+        android:textAllCaps="false"
+        android:visibility="gone"
+        app:backgroundTint="@color/yellow_700" />
+
+    <LinearLayout
+        android:id="@+id/continue_with_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/singInButton"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/divider_color" />
+
+        <TextView
+            android:id="@+id/continue_with"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_regular"
+            android:gravity="center"
+            android:text="@string/sing_in_with"
+            android:textColor="?android:textColorPrimary" />
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/divider_color" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/googleButton"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/continue_with_container"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:background="@drawable/custom_button"
+        android:drawableLeft="@drawable/google_logo"
+        android:fontFamily="@font/barlow_bold"
+        android:paddingStart="140dp"
+        android:text="@string/google"
+        android:textAlignment="viewStart"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:backgroundTint="@color/background_color_button"
+        tools:ignore="RtlHardcoded,RtlSymmetry,UnusedAttribute" />
+
+    <LinearLayout
+        android:id="@+id/singUp_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/barlow_regular"
+            android:gravity="end"
+            android:text="@string/new_pokemon_trainer"
+            android:textColor="?android:textColorPrimary" />
+
+        <TextView
+            android:id="@+id/registerNowButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_bold"
+            android:gravity="end"
+            android:text="@string/register_now"
+            android:textColor="@color/yellow_700" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/backLogin_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/barlow_regular"
+            android:gravity="end"
+            android:text="@string/pokemon_trainer"
+            android:textColor="@color/hint_color" />
+
+        <TextView
+            android:id="@+id/bakLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:fontFamily="@font/barlow_bold"
+            android:gravity="end"
+            android:text="@string/back_to_login"
+            android:textColor="@color/yellow_700" />
+    </LinearLayout>
+
+</RelativeLayout>

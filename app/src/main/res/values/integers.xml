@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="sv_list_view_items_translate_animation_duration">350</integer>
+    <integer name="sv_list_view_items_translate_animation_offset">100</integer>
+    <integer name="sv_list_view_items_translate_animation_initial_delay">150</integer>
+</resources>
