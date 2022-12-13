@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#FECA05</color>
+    <color name="placeholder">#dddddd</color>
     <color name="blue">#3860A9</color>
     <color name="auth_background">#FFC048</color>
     <color name="background_white">#f5f6fa</color>

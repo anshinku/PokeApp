@@ -5,7 +5,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapp.R
 import com.example.pokeapp.model.RegionsResult
-import com.example.pokeapp.ui.interfacebuttons.ClickListener
+import com.example.pokeapp.interfaces.interfaceadapter.ClickListener
 
 class RegionsViewHolder(itemView: View, listener: ClickListener<RegionsResult>) :
     RecyclerView.ViewHolder(itemView), View.OnClickListener {

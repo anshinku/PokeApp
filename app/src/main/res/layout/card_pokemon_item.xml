@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -8,6 +9,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="?android:textColorPrimary"
+        android:elevation="1dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp">
 
@@ -15,36 +19,105 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/pokemonImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:contentDescription="@null"
-                android:padding="10dp"
-                android:src="@drawable/pokemon_trainer" />
+            <TextView
+                android:id="@+id/pokemonNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="19dp"
+                android:fontFamily="@font/barlow_bold"
+                android:gravity="center"
+                android:text="@string/pokemon_number"
+                android:textColor="?android:textColorPrimaryInverse"
+                android:textSize="16sp"
+                tools:ignore="RelativeOverlap" />
 
             <TextView
                 android:id="@+id/pokemonName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="35dp"
-                android:layout_toEndOf="@+id/pokemonImage"
-                android:fontFamily="@font/barlow_regular"
-                android:text="@string/pokemonname"
-                android:textSize="18sp" />
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/barlow_bold"
+                android:text="@string/pikachu"
+                android:textColor="?android:textColorPrimaryInverse"
+                android:textSize="20sp"
+                tools:ignore="RelativeOverlap" />
+
+            <TextView
+                android:id="@+id/pokemonType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pokemonName"
+                android:layout_alignStart="@+id/pokemonName"
+                android:layout_marginStart="0dp"
+                android:fontFamily="@font/barlow_light"
+                android:textStyle="bold"
+                android:text="@string/electric"
+                android:textColor="?android:textColorPrimaryInverse"
+                android:textSize="14sp"
+                tools:ignore="RelativeOverlap" />
+
+            <TextView
+                android:id="@+id/pokemonSecondType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pokemonName"
+                android:layout_marginStart="5dp"
+                android:textStyle="bold"
+                android:layout_toEndOf="@+id/pokemonType"
+                android:fontFamily="@font/barlow_light"
+                android:text="@string/electric"
+                android:textColor="?android:textColorPrimaryInverse"
+                android:textSize="14sp"
+                tools:ignore="RelativeOverlap" />
 
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_alignTop="@+id/pokemonName"
-                android:layout_marginStart="108dp"
-                android:layout_marginTop="-3dp"
-                android:layout_toEndOf="@+id/pokemonName"
+                android:id="@+id/pokemonImage"
+                android:layout_width="235dp"
+                android:layout_height="255dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="74dp"
+                android:layout_marginEnd="77dp"
                 android:contentDescription="@null"
                 android:padding="10dp"
-                android:src="@drawable/ic_round_keyboard_arrow" />
+                android:src="@drawable/pikachu_avatar" />
+
+            <TextView
+                android:id="@+id/pokemonDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:layout_below="@+id/pokemonImage"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:textStyle="bold"
+                android:layout_marginStart="87dp"
+                android:layout_marginEnd="84dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/barlow_regular"
+                android:gravity="center"
+                android:text="@string/pokemon_description"
+                android:textColor="?android:textColorPrimaryInverse"
+                android:textSize="13sp"
+                tools:ignore="RelativeOverlap" />
+
+            <ImageView
+                android:id="@+id/pokemonSelected"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_below="@+id/pokemonImage"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/not_gotcha"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="@null" />
 
         </RelativeLayout>
 

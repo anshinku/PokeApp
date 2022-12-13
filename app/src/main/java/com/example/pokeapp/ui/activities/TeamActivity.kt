@@ -1,27 +1,22 @@
 package com.example.pokeapp.ui.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProvider
 import com.example.pokeapp.R
-import com.example.pokeapp.interfaces.OnStartPokemonFragment
-import com.example.pokeapp.model.SpeciesResult
+import com.example.pokeapp.interfaces.interfacefragment.OnBackPressedFragment
+import com.example.pokeapp.interfaces.interfacefragment.OnStartPokemonFragment
 import com.example.pokeapp.ui.fragments.PokemonFragment
 import com.example.pokeapp.ui.fragments.TeamFragment
-import com.example.pokeapp.viewmodel.PokeDexesViewModel
 import constants.ActivityConstants.Extra
+import kotlinx.android.synthetic.main.fragment_pokemon.*
 
-class TeamActivity : AppCompatActivity(), OnStartPokemonFragment {
+class TeamActivity : AppCompatActivity(), OnStartPokemonFragment, OnBackPressedFragment {
     private var activityResumed: Boolean = false
     private var fragmentTransactionPendingForCommit: Boolean = false
     private var addFragmentToBackStack: Boolean = false
     private var fragmentTransaction: FragmentTransaction? = null
-    private lateinit var pokeDexesViewModel: PokeDexesViewModel
-    private val dataSource: ArrayList<SpeciesResult> = ArrayList()
-
     private lateinit var regionName: String
     private lateinit var pokedexesName: String
 
@@ -47,6 +42,7 @@ class TeamActivity : AppCompatActivity(), OnStartPokemonFragment {
             onBackPressedDispatcher.onBackPressed()
         } else {
             supportFragmentManager.popBackStack()
+            finish()
         }
     }
 
@@ -72,10 +68,6 @@ class TeamActivity : AppCompatActivity(), OnStartPokemonFragment {
     private fun initialiseVariables() {
         regionName = intent.extras?.getString(Extra().regionName) as String
         pokedexesName = intent.extras?.getString(Extra().pokedexesName) as String
-
-        pokeDexesViewModel = ViewModelProvider(this)[PokeDexesViewModel::class.java]
-
-        getPokedexes()
     }
 
     private fun setup() {
@@ -94,22 +86,12 @@ class TeamActivity : AppCompatActivity(), OnStartPokemonFragment {
     private fun openPokemonFragment() {
         val fragment = PokemonFragment()
         val bundle = Bundle().apply {
-            putSerializable("pokemons", dataSource)
+            putString(Extra().pokedexesName, pokedexesName)
         }
         fragment.arguments = bundle
-
+        fragment.setOnBackPressedListener(this)
         replaceFragment(R.id.container, fragment, true)
     }
-
-    private fun getPokedexes() {
-        pokeDexesViewModel.getPokedex(pokedexesName)
-        pokeDexesViewModel.pokemonEntries.observe(this) { pokemonEntries ->
-            for (pokemon in pokemonEntries) {
-                dataSource.add(pokemon.pokemonSpecies)
-            }
-        }
-    }
-
 
     private fun replaceFragment(containerId: Int, fragment: Fragment?, addToBackStack: Boolean) {
         fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -120,6 +102,10 @@ class TeamActivity : AppCompatActivity(), OnStartPokemonFragment {
 
     override fun startPokemonFragment() {
         openPokemonFragment()
+    }
+
+    override fun backPressed() {
+        onBackPressedDispatcher.onBackPressed()
     }
 
 }

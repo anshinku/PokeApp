@@ -5,25 +5,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapp.R
-import com.example.pokeapp.model.RegionsResult
-import com.example.pokeapp.ui.interfacebuttons.ClickListener
 
-class PokemonViewHolder(itemView: View, listener: ClickListener<RegionsResult>) :
-    RecyclerView.ViewHolder(itemView), View.OnClickListener {
+class PokemonViewHolder(itemView: View) :
+    RecyclerView.ViewHolder(itemView) {
 
-    lateinit var item: RegionsResult
     var pokemonImage = itemView.findViewById(R.id.pokemonImage) as ImageView
+    var pokemonSelected = itemView.findViewById(R.id.pokemonSelected) as ImageView
     var pokemonName = itemView.findViewById(R.id.pokemonName) as TextView
+    var pokemonNumber = itemView.findViewById(R.id.pokemonNumber) as TextView
+    var pokemonType = itemView.findViewById(R.id.pokemonType) as TextView
+    var pokemonSecondType = itemView.findViewById(R.id.pokemonSecondType) as TextView
+    var pokemonDescription = itemView.findViewById(R.id.pokemonDescription) as TextView
 
-    private val clickListener = listener
-
-    init {
-        itemView.setOnClickListener(this)
-    }
-
-    override fun onClick(v: View?) {
-
-        clickListener.onClick(v!!, item,  adapterPosition)
-    }
 
 }

@@ -9,17 +9,20 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokeapp.R
 import com.example.pokeapp.manager.ProviderType
+import com.example.pokeapp.model.Users
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.FirebaseDatabase
 import constants.ActivityConstants.Extra
 import constants.ActivityConstants.Pref
 import kotlinx.android.synthetic.main.activity_auth.*
 
 
 class AuthActivity : AppCompatActivity() {
+    private val db = FirebaseDatabase.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +53,10 @@ class AuthActivity : AppCompatActivity() {
                     emailEditText.text.toString(), passwordEditText.text.toString()
                 ).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        showHome(it.result.user?.email ?: "", ProviderType.BASIC)
+                        val email = it.result.user?.email.toString()
+                        val provider = ProviderType.BASIC
+                        showHome(email, provider)
+                        saveUser(email, provider)
                     } else {
                         showAlertDialog()
                     }
@@ -112,7 +118,10 @@ class AuthActivity : AppCompatActivity() {
                         FirebaseAuth.getInstance().signInWithCredential(credentials)
                             .addOnCompleteListener {
                                 if (it.isSuccessful) {
-                                    showHome(account.email ?: "", ProviderType.GOOGLE)
+                                    val email = account.email ?: ""
+                                    val provider = ProviderType.GOOGLE
+                                    saveUser(email, provider)
+                                    showHome(email, provider)
                                 } else {
                                     showAlertDialog()
                                 }
@@ -173,6 +182,16 @@ class AuthActivity : AppCompatActivity() {
             backLogin_container.visibility = View.GONE
         }
 
+    }
+
+    private fun saveUser(email: String, provider: ProviderType) {
+        val userDB = db.getReference("Users")
+        val user = Users(email, provider.name)
+        FirebaseAuth.getInstance().currentUser?.let { it1 ->
+            userDB.child(it1.uid).setValue(user).addOnFailureListener {
+                showAlertDialog()
+            }
+        }
     }
 
     private fun showAlertDialog() {

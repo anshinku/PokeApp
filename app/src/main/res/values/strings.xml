@@ -59,7 +59,7 @@
     <string name="name_region">name region</string>
     <string name="s">♎️</string>
     <string name="pokemonname">PokemonName</string>
-    <string name="pok_mon">Pokèmon</string>
+    <string name="pok_mon">Pok&#233;mon</string>
 
     <array name="region_icons">
         <item>♈️</item>
@@ -73,15 +73,22 @@
         <item>♒️</item>
     </array>
     <string name="title_activity_team">TeamActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="region">REGION</string>
     <string name="dont_have_team">You dont have a pokemon team</string>
     <string name="create_team">Create team</string>
+    <string name="pokemon_number">№ 001</string>
+    <string name="electric">Electric</string>
+    <string name="pikachu">Pikachu</string>
+    <string name="pokemon_description">It has small electric sacs on both its\ncheeks. If threatened, it looses electric\ncharges from the sacs.</string>
+    <string name="pokemon_selection">POK&#201;MON SELECTION</string>
+    <string name="message_pokemon">"Your pokemon team must have between 3 to 6 pokemons"</string>
+    <string name="message_pokemon_6">"Your pokemon team must have between 6 to 3 pokemons"</string>
+    <string name="team_pokemon">Team Pokemon</string>
+    <string name="pokemon_team">Team Name</string>
+    <string name="add_team">Add Team</string>
+    <string name="team">Trainer</string>
+    <string name="_1">1</string>
 </resources>

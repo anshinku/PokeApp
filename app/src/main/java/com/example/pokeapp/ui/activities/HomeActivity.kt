@@ -5,16 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapp.R
+import com.example.pokeapp.interfaces.interfaceadapter.ClickListener
+import com.example.pokeapp.model.Pokemons
 import com.example.pokeapp.model.RegionsResult
 import com.example.pokeapp.ui.adapters.RegionsAdapter
-import com.example.pokeapp.ui.interfacebuttons.ClickListener
 import com.example.pokeapp.viewmodel.InfoRegionsViewModel
 import com.example.pokeapp.viewmodel.RegionsListViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -22,6 +22,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import constants.ActivityConstants.Extra
 import constants.ActivityConstants.Pref
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.fragment_pokemon.*
 
 private var provider: String? = null
 private var email: String? = null
@@ -91,10 +92,10 @@ class HomeActivity : AppCompatActivity() {
             }
         }, this, regionsView)
 
-        regionsViewModel.getRegionList()
+        regionsViewModel.getRegion()
 
-        regionsViewModel.regionsList.observe(this) { list ->
-            (regionsView.adapter as RegionsAdapter).updateRegionList(list)
+        regionsViewModel.regions.observe(this) { list ->
+            list?.let { (regionsView.adapter as RegionsAdapter).updateRegionList(it) }
             (regionsView.adapter as RegionsAdapter).setRegionIconList(
                 resources.getStringArray(R.array.region_icons).asList()
             )
@@ -103,18 +104,21 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun getPokedexes(name: String) {
+        var namePokedex = ""
+
         regionInfoViewModel.getRegion(name)
-        regionInfoViewModel.regionInfo.observe(this) { pokedexes ->
-            Toast.makeText(this, pokedexes.name, Toast.LENGTH_SHORT).show()
-
-            val intent = Intent(this@HomeActivity, TeamActivity::class.java)
-            intent.putExtra(Extra().regionName, name)
-            intent.putExtra(Extra().pokedexesName, pokedexes.name)
-            startActivity(intent)
-
+        regionInfoViewModel.pokemons.observe(this) { pokedex ->
+            if (pokedex != null) {
+                namePokedex = pokedex.name
+            }
+            if (namePokedex.isNotEmpty()) {
+                val intent = Intent(this@HomeActivity, TeamActivity::class.java)
+                intent.putExtra(Extra().regionName, name)
+                intent.putExtra(Extra().pokedexesName, namePokedex)
+                startActivity(intent)
+            }
         }
     }
-
 
     private fun showPopup(view: View) {
         val popup = PopupMenu(this, view)

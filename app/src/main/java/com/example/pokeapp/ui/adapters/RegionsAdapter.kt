@@ -12,7 +12,7 @@ import com.example.pokeapp.model.RegionsResult
 import com.example.pokeapp.ui.animations.ListViewAnimatorHelper
 import com.example.pokeapp.ui.animations.ReboundAnimator
 import com.example.pokeapp.ui.holders.RegionsViewHolder
-import com.example.pokeapp.ui.interfacebuttons.ClickListener
+import com.example.pokeapp.interfaces.interfaceadapter.ClickListener
 
 
 class RegionsAdapter(
@@ -55,7 +55,7 @@ class RegionsAdapter(
         holder.regionIcon.text = iconList
 
         val animators: Array<Animator?> =
-            reboundAnimatorManager!!.getReboundAnimatorForView(holder.itemView)
+            reboundAnimatorManager!!.getReboundAnimatorForView(holder.itemView.rootView)
 
         animatorViewHelper!!.animateViewIfNecessary(
             position, holder.itemView, animators

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:minWidth="410dp"
+    android:minHeight="280dp"
+    android:background="@drawable/custom_button"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/barlow_bold"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="@string/team_pokemon"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/namePokemonEditText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20sp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/custom_button"
+        android:drawableStart="@drawable/pokemon_team"
+        android:drawablePadding="10dp"
+        android:hint="@string/pokemon_team"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:textColor="?android:textColorPrimaryInverse"
+        android:textColorHint="?android:textColorPrimaryInverse"
+        android:textSize="12sp"
+        app:backgroundTint="?android:textColorPrimary"
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:id="@+id/addTeam"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/barlow_bold"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="@string/add_team"
+        android:layout_marginBottom="20sp"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:backgroundTint="@color/background_color_button"
+        tools:ignore="RtlHardcoded,RtlSymmetry,UnusedAttribute" />
+
+
+</LinearLayout>
