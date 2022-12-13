@@ -67,16 +67,16 @@ class ReboundAnimator @JvmOverloads constructor(
      *
      * @return Value to use for the translate animation fromValue property.
      */
-    private val translationFromValue: Float
+    private val translationFromValue: Float?
         get() {
 
             /*- If translation animation type is "TRANSLATION_X", we need to use the width of the
         screen, otherwise, use the height. */
-            val translationFromValue: Float =
+            val translationFromValue: Float? =
                 if (translationAnimatorType == ViewAnimatorHelper.TranslationAnimatorType.TRANSLATION_X) {
-                    ScreenDimensions.getWidthPixels(context).toFloat()
+                    context?.let { ScreenDimensions.getWidthPixels(it).toFloat() }
                 } else {
-                    ScreenDimensions.getHeightPixels(context).toFloat()
+                    context?.let { ScreenDimensions.getHeightPixels(it).toFloat() }
                 }
             return translationFromValue
         }
