@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapp.R
 import com.example.pokeapp.interfaces.interfaceadapter.ClickListener
-import com.example.pokeapp.model.Pokemons
 import com.example.pokeapp.model.RegionsResult
 import com.example.pokeapp.ui.adapters.RegionsAdapter
 import com.example.pokeapp.viewmodel.InfoRegionsViewModel
@@ -70,15 +69,15 @@ class HomeActivity : AppCompatActivity() {
         regionInfoViewModel = ViewModelProvider(this)[InfoRegionsViewModel::class.java]
 
         val bundle = intent.extras
-        email = bundle?.getString(Extra().email)
-        provider = bundle?.getString(Extra().providerType)
+        email = bundle?.getString(Extra().EMAIL)
+        provider = bundle?.getString(Extra().PROVIDER_TYPE)
 
         emailId.text = email
 
         //save data
-        val prefs = getSharedPreferences(Pref().preferenceFileKey, Context.MODE_PRIVATE).edit()
-        prefs.putString(Extra().email, email)
-        prefs.putString(Extra().providerType, provider)
+        val prefs = getSharedPreferences(Pref().PREFERENCE_FILE_KEY, Context.MODE_PRIVATE).edit()
+        prefs.putString(Extra().EMAIL, email)
+        prefs.putString(Extra().PROVIDER_TYPE, provider)
         prefs.apply()
     }
 
@@ -113,8 +112,8 @@ class HomeActivity : AppCompatActivity() {
             }
             if (namePokedex.isNotEmpty()) {
                 val intent = Intent(this@HomeActivity, TeamActivity::class.java)
-                intent.putExtra(Extra().regionName, name)
-                intent.putExtra(Extra().pokedexesName, namePokedex)
+                intent.putExtra(Extra().REGION_NAME, name)
+                intent.putExtra(Extra().POKEDEXES_NAME, namePokedex)
                 startActivity(intent)
             }
         }
@@ -130,7 +129,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.logOut -> {
 
                     val prefs = getSharedPreferences(
-                        Pref().preferenceFileKey, Context.MODE_PRIVATE
+                        Pref().PREFERENCE_FILE_KEY, Context.MODE_PRIVATE
                     ).edit()
                     prefs.clear()
                     prefs.apply()

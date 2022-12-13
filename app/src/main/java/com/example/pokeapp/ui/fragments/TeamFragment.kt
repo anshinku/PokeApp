@@ -16,7 +16,6 @@ import com.example.pokeapp.interfaces.interfaceadapter.ClickListener
 import com.example.pokeapp.interfaces.interfacefragment.OnStartPokemonFragment
 import com.example.pokeapp.model.Trainer
 import com.example.pokeapp.ui.adapters.TeamPokemonAdapter
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -65,7 +64,7 @@ class TeamFragment : Fragment() {
     }
 
     private fun initialiseVariable() {
-        regionNameTextView.text = arguments?.getString(Extra().regionName).toString()
+        regionNameTextView.text = arguments?.getString(Extra().REGION_NAME).toString()
     }
 
     private fun setup() {

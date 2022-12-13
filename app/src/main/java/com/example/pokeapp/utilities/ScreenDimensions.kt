@@ -1,20 +1,19 @@
-package com.example.pokeapp.utilities;
+package com.example.pokeapp.utilities
 
-import android.content.Context;
-
+import android.content.Context
 
 /**
  * This class provides utilities methods to get screen dimensions.
  */
-public class ScreenDimensions {
+object ScreenDimensions {
     /**
      * Determines screen width in pixels.
      *
      * @param context Application context.
      * @return Screen width in pixels.
      */
-    public static int getWidthPixels(Context context) {
-        return context.getResources().getDisplayMetrics().widthPixels;
+    fun getWidthPixels(context: Context): Int {
+        return context.resources.displayMetrics.widthPixels
     }
 
     /**
@@ -23,8 +22,8 @@ public class ScreenDimensions {
      * @param context Application context.
      * @return Screen height in pixels.
      */
-    public static int getHeightPixels(Context context) {
-        return context.getResources().getDisplayMetrics().heightPixels;
+    fun getHeightPixels(context: Context): Int {
+        return context.resources.displayMetrics.heightPixels
     }
 
     /**
@@ -33,8 +32,8 @@ public class ScreenDimensions {
      * @param context Application context.
      * @return Density of the display.
      */
-    public static float getDisplayDensity(Context context) {
-        return context.getResources().getDisplayMetrics().density;
+    fun getDisplayDensity(context: Context): Float {
+        return context.resources.displayMetrics.density
     }
 
     /**
@@ -43,7 +42,7 @@ public class ScreenDimensions {
      * @param context Application context.
      * @return True if the screen has at least 240px in the Y axis, false otherwise.
      */
-    public static boolean screenHasAtLeast240pxInYAxis(Context context) {
-        return context.getResources().getDisplayMetrics().ydpi >= 240;
+    fun screenHasAtLeast240pxInYAxis(context: Context): Boolean {
+        return context.resources.displayMetrics.ydpi >= 240
     }
 }

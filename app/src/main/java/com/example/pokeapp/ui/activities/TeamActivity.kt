@@ -66,14 +66,14 @@ class TeamActivity : AppCompatActivity(), OnStartPokemonFragment, OnBackPressedF
     }
 
     private fun initialiseVariables() {
-        regionName = intent.extras?.getString(Extra().regionName) as String
-        pokedexesName = intent.extras?.getString(Extra().pokedexesName) as String
+        regionName = intent.extras?.getString(Extra().REGION_NAME) as String
+        pokedexesName = intent.extras?.getString(Extra().POKEDEXES_NAME) as String
     }
 
     private fun setup() {
         val fragment = TeamFragment()
         val bundle = Bundle().apply {
-            putString(Extra().regionName, regionName.uppercase())
+            putString(Extra().REGION_NAME, regionName.uppercase())
         }
 
         fragment.arguments = bundle
@@ -86,7 +86,7 @@ class TeamActivity : AppCompatActivity(), OnStartPokemonFragment, OnBackPressedF
     private fun openPokemonFragment() {
         val fragment = PokemonFragment()
         val bundle = Bundle().apply {
-            putString(Extra().pokedexesName, pokedexesName)
+            putString(Extra().POKEDEXES_NAME, pokedexesName)
         }
         fragment.arguments = bundle
         fragment.setOnBackPressedListener(this)

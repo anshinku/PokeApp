@@ -150,9 +150,9 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun session() {
-        val prefs = getSharedPreferences(Pref().preferenceFileKey, Context.MODE_PRIVATE)
-        val email = prefs.getString(Extra().email, null)
-        val provider = prefs.getString(Extra().providerType, null)
+        val prefs = getSharedPreferences(Pref().PREFERENCE_FILE_KEY, Context.MODE_PRIVATE)
+        val email = prefs.getString(Extra().EMAIL, null)
+        val provider = prefs.getString(Extra().PROVIDER_TYPE, null)
 
         if (email != null && provider != null) {
             authContainer.visibility = View.INVISIBLE
@@ -206,8 +206,8 @@ class AuthActivity : AppCompatActivity() {
 
     private fun showHome(email: String, provider: ProviderType) {
         val homeIntent = Intent(this, HomeActivity::class.java).apply {
-            putExtra(Extra().email, email)
-            putExtra(Extra().providerType, provider.name)
+            putExtra(Extra().EMAIL, email)
+            putExtra(Extra().PROVIDER_TYPE, provider.name)
         }
         startActivity(homeIntent)
     }

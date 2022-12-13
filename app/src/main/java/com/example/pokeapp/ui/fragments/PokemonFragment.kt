@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapp.R
 import com.example.pokeapp.interfaces.interfacefragment.OnBackPressedFragment
 import com.example.pokeapp.model.Pokemons
-import com.example.pokeapp.model.Trainer
 import com.example.pokeapp.ui.adapters.PokemonAdapter
 import com.example.pokeapp.viewmodel.PokeDexesViewModel
 import com.google.firebase.database.FirebaseDatabase
@@ -100,7 +99,7 @@ class PokemonFragment : Fragment() {
     }
 
     private fun initialiseVariable() {
-        pokedexesName = arguments?.getString(Extra().pokedexesName).toString()
+        pokedexesName = arguments?.getString(Extra().POKEDEXES_NAME).toString()
 
     }
 

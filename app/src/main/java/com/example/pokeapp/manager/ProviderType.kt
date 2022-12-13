@@ -1,5 +1,5 @@
-package com.example.pokeapp.manager;
+package com.example.pokeapp.manager
 
-public enum ProviderType {
+enum class ProviderType {
     BASIC, GOOGLE
 }
