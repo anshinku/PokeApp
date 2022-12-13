@@ -19,8 +19,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapp.R
 import com.example.pokeapp.interfaces.interfacefragment.OnBackPressedFragment
 import com.example.pokeapp.model.Pokemons
+import com.example.pokeapp.model.TeamPokemon
 import com.example.pokeapp.ui.adapters.PokemonAdapter
 import com.example.pokeapp.viewmodel.PokeDexesViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import constants.ActivityConstants.Extra
 import kotlinx.android.synthetic.main.fragment_pokemon.*
@@ -35,7 +37,6 @@ class PokemonFragment : Fragment() {
     private val pokedexesViewModel: PokeDexesViewModel by lazy {
         ViewModelProvider(this)[PokeDexesViewModel::class.java]
     }
-    private val pokemons = mutableListOf<List<Pokemons>?>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -76,9 +77,9 @@ class PokemonFragment : Fragment() {
 
         pokedexesViewModel.isLoading.observe(context) {
             val loader = shimmerFrameLayoutPokemon.isShimmerStarted == it
-            val loderS = shimmerFrameLayoutPokemonSecond.isShimmerStarted == it
+            val loaderS = shimmerFrameLayoutPokemonSecond.isShimmerStarted == it
             shimmerFrameLayoutPokemon.showShimmer(loader)
-            shimmerFrameLayoutPokemonSecond.showShimmer(loderS)
+            shimmerFrameLayoutPokemonSecond.showShimmer(loaderS)
 
         }
 
@@ -116,7 +117,9 @@ class PokemonFragment : Fragment() {
     private fun setOnclickListeners() {
         sendData.setOnClickListener {
             val pokemonTeam = adapter.teamPokemon()
-            if (pokemonTeam.size < 3) {
+            if (pokemonTeam.size == 0) {
+                return@setOnClickListener
+            } else if (pokemonTeam.size < 3) {
                 warningDialog(getString(R.string.message_pokemon))
             } else if (pokemonTeam.size > 6) {
                 warningDialog(getString(R.string.message_pokemon_6))
@@ -126,10 +129,14 @@ class PokemonFragment : Fragment() {
         }
     }
 
-    private fun saveUser(pokemonTeam: MutableList<Pokemons>, pokemonTeamName: String) {
-        val userDB = db.getReference(pokemonTeamName)
-        userDB.setValue(pokemonTeam).addOnFailureListener {
-            showAlertDialog()
+    private fun saveTeam(teamPokemon: MutableList<Pokemons>, pokemonTeamName: String) {
+        val pokemonTeam = TeamPokemon(pokemonTeamName, teamPokemon)
+        FirebaseAuth.getInstance().currentUser?.let { it1 ->
+            val userDb = db.getReference("Users").child(it1.uid)
+            val team = userDb.child("pokemonTeams").push()
+            team.setValue(pokemonTeam).addOnFailureListener {
+                showAlertDialog()
+            }
         }
     }
 
@@ -158,7 +165,7 @@ class PokemonFragment : Fragment() {
         val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window?.setLayout(ActionBar.LayoutParams.MATCH_PARENT,
-            ActionBar.LayoutParams.WRAP_CONTENT);
+            ActionBar.LayoutParams.WRAP_CONTENT)
         dialog.setContentView(R.layout.custom_team_dialog)
 
         val namePokemonEditText: EditText = dialog.findViewById(R.id.namePokemonEditText)
@@ -166,7 +173,7 @@ class PokemonFragment : Fragment() {
 
         addTeam.setOnClickListener {
 
-            saveUser(pokemonsTeam, namePokemonEditText.text.toString())
+            saveTeam(pokemonsTeam, namePokemonEditText.text.toString())
             dialog.dismiss()
             onBackPressedFragment?.backPressed()
 

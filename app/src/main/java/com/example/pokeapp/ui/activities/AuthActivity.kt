@@ -49,9 +49,9 @@ class AuthActivity : AppCompatActivity() {
         singUpButton.setOnClickListener {
             if (emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()) {
 
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-                    emailEditText.text.toString(), passwordEditText.text.toString()
-                ).addOnCompleteListener {
+                FirebaseAuth.getInstance()
+                    .createUserWithEmailAndPassword(emailEditText.text.toString(),
+                        passwordEditText.text.toString()).addOnCompleteListener {
                     if (it.isSuccessful) {
                         val email = it.result.user?.email.toString()
                         val provider = ProviderType.BASIC
@@ -67,9 +67,8 @@ class AuthActivity : AppCompatActivity() {
         singInButton.setOnClickListener {
             if (emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()) {
 
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(
-                    emailEditText.text.toString(), passwordEditText.text.toString()
-                ).addOnCompleteListener {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(emailEditText.text.toString(),
+                    passwordEditText.text.toString()).addOnCompleteListener {
                     if (it.isSuccessful) {
                         showHome(it.result.user?.email ?: "", ProviderType.BASIC)
                     } else {
@@ -165,7 +164,6 @@ class AuthActivity : AppCompatActivity() {
         if (isSinUp) {
             continue_with_container.visibility = View.GONE
             singInButton.visibility = View.GONE
-            recover_password.visibility = View.GONE
             singUp_container.visibility = View.GONE
             googleButton.visibility = View.GONE
 
@@ -174,10 +172,8 @@ class AuthActivity : AppCompatActivity() {
         } else {
             continue_with_container.visibility = View.VISIBLE
             singInButton.visibility = View.VISIBLE
-            recover_password.visibility = View.VISIBLE
             singUp_container.visibility = View.VISIBLE
             googleButton.visibility = View.VISIBLE
-
             singUpButton.visibility = View.GONE
             backLogin_container.visibility = View.GONE
         }

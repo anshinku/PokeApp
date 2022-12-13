@@ -41,7 +41,11 @@ data class Pokemons(
     @Expose @SerializedName("sprites") val sprites: Sprite,
     @Expose @SerializedName("flavor_text_entries") val flavorText: FlavorText,
     var isSelected: Boolean
+
 ) : Parcelable
+{
+    constructor(): this("", 0, emptyList(), Sprite(), FlavorText(""), false)
+}
 
 @Parcelize
 data class FlavorText(
@@ -52,31 +56,46 @@ data class FlavorText(
 data class PokemonTypeSlot(
     @Expose @SerializedName("name") val name: String,
     @Expose @SerializedName("type") val type: PokemonType,
-) : Parcelable
+) : Parcelable {
+    constructor(): this("", PokemonType())
+}
 
 @Parcelize
 data class PokemonType(
     @Expose @SerializedName("name") val name: String
 ) : Parcelable
+{
+    constructor(): this("")
+}
 
 @Parcelize
 data class Sprite(
     @Expose @SerializedName("other") val sprites: Other
-) : Parcelable
+) : Parcelable {
+    constructor(): this(Other())
+}
 
 @Parcelize
 data class Other(
     @Expose @SerializedName("dream_world") val default: Default,
     @Expose @SerializedName("home") val homeDefault: HomeDefault
 ) : Parcelable
+{
+    constructor(): this(Default(), HomeDefault())
+}
 
 @Parcelize
 data class Default(
     @Expose @SerializedName("front_default") val pokemonImage: String?
 ) : Parcelable
+{
+    constructor(): this("")
+}
 
 @Parcelize
 data class HomeDefault(
     @Expose @SerializedName("front_default") val pokemonImage: String
 ) : Parcelable
-
+{
+    constructor(): this("")
+}
