@@ -13,5 +13,7 @@ se puede crear equipos de pokemones y estos se crean en firebase real time dadab
 Permite hacer un test de carash, para que se pueda certificar que se repontan los cracheos de la aplicacion.
 
 Para su instalacion: 
-Clonar el repositorio.
+Clonar repositorio.
+Dirigirse a la carpeta en el que se clono el proyecto.
+Abrir el proyecto.
 
