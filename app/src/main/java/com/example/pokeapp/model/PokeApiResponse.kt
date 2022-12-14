@@ -25,7 +25,7 @@ data class Pokedexes(
 )
 
 data class PokeDexResponse(
-    @Expose @SerializedName("pokemon_entries") val pokemonEntries: List<PokemonEntries>
+    @Expose @SerializedName("pokemon_entries") val pokemonEntries: List<PokemonEntries>?
 )
 
 data class PokemonEntries(
@@ -50,7 +50,10 @@ data class Pokemons(
 @Parcelize
 data class FlavorText(
     val flavorText: String
-) : Parcelable
+) : Parcelable {
+    constructor(): this("")
+
+}
 
 @Parcelize
 data class PokemonTypeSlot(

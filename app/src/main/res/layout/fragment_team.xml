@@ -50,7 +50,8 @@
             android:fontFamily="@font/barlow_light"
             android:text="@string/dont_have_team"
             android:textColor="?android:textColorPrimary"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/placeholderImage"
@@ -58,14 +59,15 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:contentDescription="@null"
-            android:src="@drawable/team" />
+            android:src="@drawable/team"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/teamView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/card_team_item"
-            tools:itemCount="5" />
+            tools:itemCount="5"
+            tools:listitem="@layout/card_team_item" />
 
         <LinearLayout
             android:layout_width="match_parent"

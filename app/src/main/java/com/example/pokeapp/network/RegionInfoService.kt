@@ -15,8 +15,8 @@ class RegionInfoService {
         withContext(Dispatchers.IO) {
             val call = service.getRegionInfo(name)
 
-            val pokedex = call.body()!!.pokedexes.last()
-            pokedexes.add(pokedex)
+            val pokedex = call.body()!!.pokedexes
+            pokedexes.add(pokedex[0])
 
         }.let {
             return pokedexes.first()

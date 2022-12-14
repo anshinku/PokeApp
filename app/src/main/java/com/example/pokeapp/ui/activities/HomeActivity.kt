@@ -27,7 +27,6 @@ private var provider: String? = null
 private var email: String? = null
 
 private lateinit var regionsViewModel: RegionsListViewModel
-private lateinit var regionInfoViewModel: InfoRegionsViewModel
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +65,6 @@ class HomeActivity : AppCompatActivity() {
 
     private fun initialiseVariables() {
         regionsViewModel = ViewModelProvider(this)[RegionsListViewModel::class.java]
-        regionInfoViewModel = ViewModelProvider(this)[InfoRegionsViewModel::class.java]
 
         val bundle = intent.extras
         email = bundle?.getString(Extra().EMAIL)
@@ -86,7 +84,10 @@ class HomeActivity : AppCompatActivity() {
         regionsView!!.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         regionsView.adapter = RegionsAdapter(object : ClickListener<RegionsResult> {
             override fun onClick(view: View, item: RegionsResult, position: Int) {
-                getPokedexes(item.name)
+
+                val intent = Intent(this@HomeActivity, TeamActivity::class.java)
+                intent.putExtra(Extra().REGION_NAME, item.name)
+                startActivity(intent)
 
             }
         }, this, regionsView)
@@ -95,28 +96,10 @@ class HomeActivity : AppCompatActivity() {
 
         regionsViewModel.regions.observe(this) { list ->
             list?.let { (regionsView.adapter as RegionsAdapter).updateRegionList(it) }
-            (regionsView.adapter as RegionsAdapter).setRegionIconList(
-                resources.getStringArray(R.array.region_icons).asList()
-            )
+            (regionsView.adapter as RegionsAdapter).setRegionIconList(resources.getStringArray(R.array.region_icons)
+                .asList())
         }
 
-    }
-
-    fun getPokedexes(name: String) {
-        var namePokedex = ""
-
-        regionInfoViewModel.getRegion(name)
-        regionInfoViewModel.pokemons.observe(this) { pokedex ->
-            if (pokedex != null) {
-                namePokedex = pokedex.name
-            }
-            if (namePokedex.isNotEmpty()) {
-                val intent = Intent(this@HomeActivity, TeamActivity::class.java)
-                intent.putExtra(Extra().REGION_NAME, name)
-                intent.putExtra(Extra().POKEDEXES_NAME, namePokedex)
-                startActivity(intent)
-            }
-        }
     }
 
     private fun showPopup(view: View) {
@@ -128,9 +111,8 @@ class HomeActivity : AppCompatActivity() {
             when (item!!.itemId) {
                 R.id.logOut -> {
 
-                    val prefs = getSharedPreferences(
-                        Pref().PREFERENCE_FILE_KEY, Context.MODE_PRIVATE
-                    ).edit()
+                    val prefs = getSharedPreferences(Pref().PREFERENCE_FILE_KEY,
+                        Context.MODE_PRIVATE).edit()
                     prefs.clear()
                     prefs.apply()
 

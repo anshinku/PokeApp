@@ -17,7 +17,7 @@ class PokemonService {
 
             val pokedex = call.body()
             if (pokedex != null) {
-                for (pokemon in pokedex.pokemonEntries) {
+                for (pokemon in pokedex.pokemonEntries?.take(100)!!) {
                     val pokemonDetails = getPokemon((pokemon.pokemons.name))
                     pokemonDetails?.let { pokemons.add(it) }
                 }
@@ -31,6 +31,5 @@ class PokemonService {
 
     private suspend fun getPokemon(name: String): Pokemons? {
         return service.getPokemon(name).body()
-
     }
 }

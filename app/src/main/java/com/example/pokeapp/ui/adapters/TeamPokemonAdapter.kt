@@ -15,7 +15,6 @@ import com.example.pokeapp.ui.animations.ReboundAnimator
 import com.example.pokeapp.ui.holders.TeamPokemonViewHolder
 import com.example.pokeapp.utilities.loadUrl
 
-
 class TeamPokemonAdapter(
     private val clickListener: ClickListener<TeamPokemon>,
     private val context: Activity?,
@@ -43,8 +42,78 @@ class TeamPokemonAdapter(
 
         holder.item = team
         holder.teamName.text = team.teamName.uppercase()
-        holder.countPokemon.text = team.pokemons.size.toString()
-        team.pokemons[0].sprites.sprites.default.pokemonImage?.let { holder.firstPokemon.loadUrl(it) }
+        val formatterNumber = team.pokemons.size.toString().padStart(3, '0')
+        holder.countPokemon.text = formatterNumber
+
+        if (team.pokemons.isNotEmpty()) {
+            if (team.pokemons[0].sprites.sprites.default.pokemonImage.toString().isNotEmpty()) {
+                team.pokemons[0].sprites.sprites.default.pokemonImage?.let {
+                    holder.firstPokemon.loadUrl(it)
+                }
+            } else {
+                team.pokemons[0].sprites.sprites.homeDefault.pokemonImage.let {
+                    holder.firstPokemon.loadUrl(it)
+                }
+            }
+
+            if (team.pokemons[1].sprites.sprites.default.pokemonImage.toString().isNotEmpty()) {
+                team.pokemons[1].sprites.sprites.default.pokemonImage?.let {
+                    holder.secondPokemon.loadUrl(it)
+                }
+            } else {
+                team.pokemons[1].sprites.sprites.homeDefault.pokemonImage.let {
+                    holder.secondPokemon.loadUrl(it)
+                }
+            }
+
+            if (team.pokemons[2].sprites.sprites.default.pokemonImage.toString().isNotEmpty()) {
+                team.pokemons[2].sprites.sprites.default.pokemonImage?.let {
+                    holder.thirdPokemon.loadUrl(it)
+                }
+            } else {
+                team.pokemons[2].sprites.sprites.homeDefault.pokemonImage.let {
+                    holder.thirdPokemon.loadUrl(it)
+                }
+            }
+
+            if (team.pokemons.size > 3) {
+
+                if (team.pokemons[3].sprites.sprites.default.pokemonImage.toString().isNotEmpty()) {
+                    team.pokemons[3].sprites.sprites.default.pokemonImage?.let {
+                        holder.forPokemon.loadUrl(it)
+                    }
+                } else {
+                    team.pokemons[3].sprites.sprites.homeDefault.pokemonImage.let {
+                        holder.forPokemon.loadUrl(it)
+                    }
+                }
+            }
+
+            if (team.pokemons.size > 4) {
+
+                if (team.pokemons[4].sprites.sprites.default.pokemonImage.toString().isNotEmpty()) {
+                    team.pokemons[4].sprites.sprites.default.pokemonImage?.let {
+                        holder.forPokemon.loadUrl(it)
+                    }
+                } else {
+                    team.pokemons[4].sprites.sprites.homeDefault.pokemonImage.let {
+                        holder.forPokemon.loadUrl(it)
+                    }
+                }
+
+                if (team.pokemons.size == 5) if (team.pokemons.last().sprites.sprites.default.pokemonImage.toString()
+                        .isNotEmpty()
+                ) {
+                    team.pokemons.last().sprites.sprites.default.pokemonImage?.let {
+                        holder.forPokemon.loadUrl(it)
+                    }
+                } else {
+                    team.pokemons.last().sprites.sprites.homeDefault.pokemonImage.let {
+                        holder.forPokemon.loadUrl(it)
+                    }
+                }
+            }
+        }
 
 
         val animators: Array<Animator?> =
@@ -60,5 +129,16 @@ class TeamPokemonAdapter(
         this.teamPokemon.clear()
         this.teamPokemon.addAll(teamPokemon)
         notifyDataSetChanged()
+    }
+
+    fun deleteTeam(position: Int) {
+        teamPokemon.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, teamPokemon.size)
+        notifyDataSetChanged()
+    }
+
+    fun teamPokemon(): MutableList<TeamPokemon> {
+        return this.teamPokemon
     }
 }

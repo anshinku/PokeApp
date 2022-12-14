@@ -4,11 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import com.example.pokeapp.R
 import com.example.pokeapp.interfaces.interfacefragment.OnBackPressedFragment
 import com.example.pokeapp.interfaces.interfacefragment.OnStartPokemonFragment
 import com.example.pokeapp.ui.fragments.PokemonFragment
 import com.example.pokeapp.ui.fragments.TeamFragment
+import com.example.pokeapp.viewmodel.InfoRegionsViewModel
 import constants.ActivityConstants.Extra
 import kotlinx.android.synthetic.main.fragment_pokemon.*
 
@@ -18,7 +20,8 @@ class TeamActivity : AppCompatActivity(), OnStartPokemonFragment, OnBackPressedF
     private var addFragmentToBackStack: Boolean = false
     private var fragmentTransaction: FragmentTransaction? = null
     private lateinit var regionName: String
-    private lateinit var pokedexesName: String
+    private var pokedexesName: String = ""
+    private lateinit var regionInfoViewModel: InfoRegionsViewModel
 
     override fun onResume() {
         super.onResume()
@@ -40,9 +43,10 @@ class TeamActivity : AppCompatActivity(), OnStartPokemonFragment, OnBackPressedF
         val count = supportFragmentManager.backStackEntryCount
         if (count == 0) {
             onBackPressedDispatcher.onBackPressed()
+            finish()
+
         } else {
             supportFragmentManager.popBackStack()
-            finish()
         }
     }
 
@@ -67,13 +71,23 @@ class TeamActivity : AppCompatActivity(), OnStartPokemonFragment, OnBackPressedF
 
     private fun initialiseVariables() {
         regionName = intent.extras?.getString(Extra().REGION_NAME) as String
-        pokedexesName = intent.extras?.getString(Extra().POKEDEXES_NAME) as String
+        regionInfoViewModel = ViewModelProvider(this)[InfoRegionsViewModel::class.java]
+        getPokedexes(regionName)
+    }
+
+    private fun getPokedexes(name: String) {
+
+        regionInfoViewModel.getRegion(name)
+        regionInfoViewModel.pokemons.observe(this) { pokedex ->
+            pokedexesName = pokedex?.name.toString()
+        }
     }
 
     private fun setup() {
         val fragment = TeamFragment()
         val bundle = Bundle().apply {
             putString(Extra().REGION_NAME, regionName.uppercase())
+            putString(Extra().POKEDEXES_NAME, pokedexesName)
         }
 
         fragment.arguments = bundle
@@ -87,13 +101,14 @@ class TeamActivity : AppCompatActivity(), OnStartPokemonFragment, OnBackPressedF
         val fragment = PokemonFragment()
         val bundle = Bundle().apply {
             putString(Extra().POKEDEXES_NAME, pokedexesName)
+            putString(Extra().REGION_NAME, regionName)
         }
         fragment.arguments = bundle
         fragment.setOnBackPressedListener(this)
         replaceFragment(R.id.container, fragment, true)
     }
 
-    private fun replaceFragment(containerId: Int, fragment: Fragment?, addToBackStack: Boolean) {
+     fun replaceFragment(containerId: Int, fragment: Fragment?, addToBackStack: Boolean) {
         fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction!!.replace(containerId, fragment!!)
         addFragmentToBackStack = addToBackStack

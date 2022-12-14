@@ -31,6 +31,7 @@ import kotlinx.android.synthetic.main.fragment_pokemon.*
 class PokemonFragment : Fragment() {
     private var context = AppCompatActivity()
     private lateinit var pokedexesName: String
+    private lateinit var regionName: String
     private lateinit var adapter: PokemonAdapter
     private val db = FirebaseDatabase.getInstance()
     private var onBackPressedFragment: OnBackPressedFragment? = null
@@ -74,13 +75,11 @@ class PokemonFragment : Fragment() {
 
     private fun initObserver() {
         pokedexesViewModel.getAllPokemon(pokedexesName)
-
         pokedexesViewModel.isLoading.observe(context) {
             val loader = shimmerFrameLayoutPokemon.isShimmerStarted == it
             val loaderS = shimmerFrameLayoutPokemonSecond.isShimmerStarted == it
             shimmerFrameLayoutPokemon.showShimmer(loader)
             shimmerFrameLayoutPokemonSecond.showShimmer(loaderS)
-
         }
 
         pokedexesViewModel.pokemons.observe(context) { pokemonList ->
@@ -101,6 +100,7 @@ class PokemonFragment : Fragment() {
 
     private fun initialiseVariable() {
         pokedexesName = arguments?.getString(Extra().POKEDEXES_NAME).toString()
+        regionName = arguments?.getString(Extra().REGION_NAME).toString()
 
     }
 
@@ -131,8 +131,9 @@ class PokemonFragment : Fragment() {
 
     private fun saveTeam(teamPokemon: MutableList<Pokemons>, pokemonTeamName: String) {
         val pokemonTeam = TeamPokemon(pokemonTeamName, teamPokemon)
+
         FirebaseAuth.getInstance().currentUser?.let { it1 ->
-            val userDb = db.getReference("Users").child(it1.uid)
+            val userDb = db.getReference("Users").child(it1.uid).child(regionName)
             val team = userDb.child("pokemonTeams").push()
             team.setValue(pokemonTeam).addOnFailureListener {
                 showAlertDialog()
@@ -172,12 +173,11 @@ class PokemonFragment : Fragment() {
         val addTeam: Button = dialog.findViewById(R.id.addTeam)
 
         addTeam.setOnClickListener {
-
             saveTeam(pokemonsTeam, namePokemonEditText.text.toString())
             dialog.dismiss()
             onBackPressedFragment?.backPressed()
-
         }
+
         dialog.show()
     }
 

@@ -32,7 +32,7 @@
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="19dp"
                 android:layout_marginBottom="25dp"
-                android:src="@drawable/pokemon_trainer" />
+                android:background="@color/placeholder" />
 
             <TextView
                 android:id="@+id/teamName"
@@ -46,10 +46,11 @@
                 android:layout_marginBottom="10dp"
                 android:layout_toStartOf="@+id/countPokemon"
                 android:layout_toEndOf="@+id/trainer"
+                android:background="@color/placeholder"
                 android:fontFamily="@font/barlow_bold"
                 android:gravity="center"
                 android:text="@string/name_region"
-                android:textColor="?android:textColorPrimaryInverse"
+                android:textColor="@color/placeholder"
                 android:textSize="24sp" />
 
             <TextView
@@ -61,10 +62,11 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
+                android:background="@color/placeholder"
                 android:fontFamily="@font/barlow_bold"
                 android:gravity="center"
                 android:text="@string/_1"
-                android:textColor="?android:textColorPrimaryInverse"
+                android:textColor="@color/placeholder"
                 android:textSize="20sp"
                 tools:ignore="RelativeOverlap" />
 
@@ -90,6 +92,7 @@
                         android:layout_width="34dp"
                         android:layout_height="34dp"
                         android:layout_marginStart="10dp"
+                        android:background="@color/placeholder"
                         android:contentDescription="@null" />
 
                     <ImageView
@@ -97,6 +100,7 @@
                         android:layout_width="34dp"
                         android:layout_height="34dp"
                         android:layout_marginStart="37dp"
+                        android:background="@color/placeholder"
                         android:contentDescription="@null" />
 
                     <ImageView
@@ -104,6 +108,7 @@
                         android:layout_width="34dp"
                         android:layout_height="34dp"
                         android:layout_marginStart="37dp"
+                        android:background="@color/placeholder"
                         android:contentDescription="@null" />
 
                 </LinearLayout>
@@ -118,6 +123,7 @@
                         android:layout_width="34dp"
                         android:layout_height="34dp"
                         android:layout_marginStart="37dp"
+                        android:background="@color/placeholder"
                         android:contentDescription="@null" />
 
                     <ImageView
@@ -125,6 +131,7 @@
                         android:layout_width="34dp"
                         android:layout_height="34dp"
                         android:layout_marginStart="37dp"
+                        android:background="@color/placeholder"
                         android:contentDescription="@null" />
 
                     <ImageView
@@ -132,6 +139,7 @@
                         android:layout_width="34dp"
                         android:layout_height="34dp"
                         android:layout_marginStart="37dp"
+                        android:background="@color/placeholder"
                         android:contentDescription="@null" />
 
                 </LinearLayout>

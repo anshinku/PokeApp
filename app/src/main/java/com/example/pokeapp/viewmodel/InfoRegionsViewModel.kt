@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokeapp.domain.GetRegionInfoUseCase
 import com.example.pokeapp.model.Pokedexes
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class InfoRegionsViewModel : ViewModel() {
@@ -13,7 +15,7 @@ class InfoRegionsViewModel : ViewModel() {
     val isLoading = MutableLiveData<Boolean?>()
     var getRegionInfoUseCase = GetRegionInfoUseCase()
 
-    fun getRegion(name: String) {
+    fun getRegion(name: String): MutableLiveData<Pokedexes?> {
         viewModelScope.launch {
             isLoading.postValue(true)
             val result = getRegionInfoUseCase(name)
@@ -23,6 +25,7 @@ class InfoRegionsViewModel : ViewModel() {
                 pokemons.postValue(result)
             }
         }
+        return pokemons
     }
 
 }
